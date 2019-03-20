@@ -1,0 +1,140 @@
+body {
+  background-color: $color-light-gray;
+  padding-top: 64px + 30px;
+}
+
+main {
+  padding-bottom: 125px;
+  &.le-no-cta-button {
+    padding-bottom: 20px;
+  }
+}
+
+h1 {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+md-dialog-actions {
+  justify-content: center;
+}
+
+.le-toolbar {
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  box-shadow: 0 20px 20px 4px $color-light-gray;
+
+  .mat-toolbar-row {
+    height: 64px !important;
+  }
+
+  button.active::before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid map-get($mat-deep-purple, 500);
+  }
+}
+
+.le-cta-button {
+  position: fixed !important;
+  bottom: 34px;
+  right: 34px;
+  z-index: 2;
+  animation: .3s zoomIn;
+}
+
+.le-list-card {
+  display: flex !important;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 20px;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  &:hover,
+  &:focus {
+    outline: none;
+    box-shadow:
+      0 4px 5px -2px rgba(0, 0, 0, .2),
+      0 7px 10px 1px rgba(0, 0, 0, .14),
+      0 2px 16px 1px rgba(0, 0, 0, .12) !important;
+  }
+
+  &__spacer {
+    flex: 1 1 auto;
+  }
+
+  button {
+    md-icon {
+      color: $color-gray;
+      transition: color .3s;
+    }
+
+    &:hover md-icon {
+      color: $color-black;
+    }
+  }
+}
+
+.le-loading-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.le-no-content {
+  position: fixed;
+  top: calc(50% + 32px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  animation: .8s appear;
+  &--interactive {
+    cursor: pointer;
+  }
+
+  &__icon {
+    height: auto !important;
+    width: auto !important;
+    color: $color-gray;
+    font-size: 96px;
+  }
+
+  &__message {
+    margin-bottom: 0;
+    color: $color-gray;
+  }
+}
+
+@media (min-width: 992px) {
+  main {
+    padding-bottom: 99px;
+    &.le-no-cta-button {
+      padding-bottom: 99px;
+    }
+  }
+
+  .le-cta-button {
+    top: 34px;
+  }
+}
+
+@keyframes appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}

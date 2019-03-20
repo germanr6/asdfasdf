@@ -1,0 +1,6 @@
+.le-nav {
+  display: flex;
+}
+.le-nav__spacer {
+  flex: 1 1 auto;
+}

@@ -1,0 +1,27 @@
+<form class="todo-form" [formGroup]="todoListForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <mat-form-field class="todo-full-width">
+      <input
+        matInput
+        type="text"
+        placeholder="List name"
+        formControlName="name"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field class="todo-full-width">
+      <input
+        matInput
+        type="text"
+        placeholder="List description"
+        formControlName="description"
+      />
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button type="submit" [disabled]="todoListForm.invalid">
+      Create list
+    </button>
+    <button mat-button mat-dialog-close type="button">Close</button>
+  </mat-dialog-actions>
+</form>

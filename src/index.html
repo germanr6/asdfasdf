@@ -9,8 +9,106 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <script>
+      (function() {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, "", redirect);
+        }
+      })();
+    </script>
+
+    <style>
+      le-app:empty + .le-loading-app {
+        opacity: 1;
+        z-index: 999;
+      }
+
+      .le-loading-app {
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.6s ease-in-out, z-index 1ms 0.6s;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #673ab7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .le-spinner {
+        width: 70px;
+        text-align: center;
+      }
+
+      .le-spinner > div {
+        width: 18px;
+        height: 18px;
+        background-color: #fff;
+        border-radius: 50%;
+        display: inline-block;
+        animation: 1.4s bounce infinite ease-in-out both;
+      }
+
+      .le-spinner--purple > div {
+        background-color: #673ab7;
+      }
+
+      .le-spinner .bounce1 {
+        animation-delay: -0.32s;
+      }
+
+      .le-spinner .bounce2 {
+        animation-delay: -0.16s;
+      }
+
+      @keyframes bounce {
+        0%,
+        80%,
+        100% {
+          transform: scale(0);
+        }
+        40% {
+          transform: scale(1);
+        }
+      }
+    </style>
 </head>
 <body>
-  <app-root></app-root>
+    <body>
+        <app-root></app->
+    
+        <div class="le-loading-app">
+          <div class="le-spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
+    
+          <noscript>
+            <style>
+              .le-spinner {
+                display: none;
+              }
+    
+              .le-noscript {
+                text-align: center;
+                color: #fff;
+                font-size: 20px;
+                line-height: 1.4;
+                font-family: Roboto, "Helvetica Neue", sans-serif;
+              }
+            </style>
+    
+            <h1 class="le-noscript">
+              Please enable it in your browser.
+            </h1>
+          </noscript>
+        </div>
 </body>
 </html>
