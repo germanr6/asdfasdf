@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -13,22 +14,29 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TodoService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  getAll(): Observable<any> {
-    return this.http.get('/api/todo');
+  openListDetails(event, listId: number) {
+    this.router.navigate([this.router.url, listId]);
   }
 
-  addTodoList(todo: object): Observable<object> {
-    return this.http.post('/api/todo', { name: todo }, httpOptions);
+  getOne(listId: number): Observable<any> {
+    return this.http.get('/api/todo/list/' + listId);
+  }
+
+  getAll(): Observable<any> {
+    return this.http.get('/api/todo/list/user/1');
+  }
+
+  addTodoList(todo: Todo): Observable<object> {
+    return this.http.post('/api/todo/list', todo, httpOptions);
   }
 
   deleteTodoList(listId: number): Observable<object> {
-    return this.http.delete('/api/todo/' + listId, httpOptions);
+    return this.http.delete('/api/todo/list/' + listId);
   }
 
-  updateTodoList(listId: number, listName: string): Observable<object> {
-    console.log(listId, listName);
-    return this.http.put('/api/todo/' + listId, { name: listName }, httpOptions);
+  updateTodoList(listId: number, todo: Todo): Observable<object> {
+    return this.http.put('/api/todo/list/' + listId, todo, httpOptions);
   }
 }

@@ -1,0 +1,124 @@
+<app-nav></app-nav>
+<button
+  mat-fab
+  matTooltip="Add a task"
+  matTooltipPosition="left"
+  class="le-cta-button"
+  (click)="openAddListItemDialog(list.listId)"
+>
+  <mat-icon aria-label="Add todo list">add</mat-icon>
+</button>
+
+<main class="container" [ngSwitch]="listItems.length">
+  <div *ngSwitchCase="0">
+    <div class="le-loading-content" *ngIf="loadingListItems">
+      <div class="le-spinner le-spinner--purple">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
+    </div>
+
+    <div
+      class="le-no-content le-no-content--interactive"
+      *ngIf="!loadingListItems"
+      (click)="openAddListItemDialog(list.listId)"
+    >
+      <mat-icon class="le-no-content__icon">note_add</mat-icon>
+      <p class="le-no-content__message">Add an task to the list</p>
+    </div>
+  </div>
+
+  <div *ngSwitchDefault>
+    <h1>{{ list?.name }}</h1>
+
+    <mat-card class="le-list-items-card">
+      <mat-list>
+        <ng-template ngFor let-item [ngForOf]="listItems">
+          <div *ngIf="!item.done">
+            <mat-list-item class="le-list-item">
+              <mat-checkbox
+                disableRipple
+                [checked]="item.done"
+                (change)="checkItem($event, item.taskId, item.title)"
+                >{{ item.title }}</mat-checkbox
+              >
+              <button
+                class="le-list-item__edit-button"
+                (click)="
+                  openEditListItemDialog(
+                    list.listId,
+                    item.taskId,
+                    item.title,
+                    item.description,
+                    item.done
+                  )
+                "
+              >
+                <mat-icon class="le-list-item__edit">create</mat-icon>
+              </button>
+
+              <span class="le-list-item__spacer"></span>
+
+              <button
+                class="le-list-item__delete-button"
+                (click)="deleteTask(item.taskId, item.title)"
+              >
+                <mat-icon class="le-list-item__delete">close</mat-icon>
+              </button>
+            </mat-list-item>
+
+            <p class="le-list-item__desc" *ngIf="item.description">
+              {{ item.description }}
+            </p>
+
+            <mat-divider></mat-divider>
+          </div>
+        </ng-template>
+
+        <ng-template ngFor let-item [ngForOf]="listItems">
+          <div *ngIf="item.done">
+            <mat-list-item class="le-list-item">
+              <mat-checkbox
+                disableRipple
+                [checked]="item.done"
+                (change)="uncheckItem($event, item.taskId, item.title)"
+                >{{ item.title }}</mat-checkbox
+              >
+
+              <button
+                class="le-list-item__edit-button"
+                (click)="
+                  openEditListItemDialog(
+                    list.listId,
+                    item.taskId,
+                    item.title,
+                    item.description,
+                    item.done
+                  )
+                "
+              >
+                <mat-icon class="le-list-item__edit">create</mat-icon>
+              </button>
+
+              <span class="le-list-item__spacer"></span>
+
+              <button
+                class="le-list-item__delete-button"
+                (click)="deleteTask(item.taskId, item.title)"
+              >
+                <mat-icon class="le-list-item__delete">close</mat-icon>
+              </button>
+            </mat-list-item>
+
+            <p class="le-list-item__desc" *ngIf="item.description">
+              {{ item.description }}
+            </p>
+
+            <mat-divider></mat-divider>
+          </div>
+        </ng-template>
+      </mat-list>
+    </mat-card>
+  </div>
+</main>

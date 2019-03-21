@@ -27,7 +27,9 @@ export class TodoListComponent implements OnInit {
     });
   }
 
-  public openList(event, listId: string) {}
+  public openList(event, listId: number) {
+    this.todoService.openListDetails(event, listId);
+  }
 
   public openAddListDialog() {
     const dialogRef = this.dialog.open(AddTodoDialogComponent);
@@ -36,11 +38,16 @@ export class TodoListComponent implements OnInit {
     });
   }
 
-  public openEditListDialog(listId: number, listName: string) {
+  public openEditListDialog(
+    listId: number,
+    listName: string,
+    listDescription: string
+  ) {
     const dialogRef = this.dialog.open(EditTodoDialogComponent, {
       data: {
         listId,
-        listName
+        listName,
+        listDescription
       }
     });
     dialogRef.afterClosed().subscribe(() => {

@@ -1,6 +1,11 @@
 {
-  "/api/todo": {
-    "target": "http://localhost:8085",
+  "/api/todo/list": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api/todo/task": {
+    "target": "http://localhost:8080",
     "secure": false,
     "changeOrigin": true
   }

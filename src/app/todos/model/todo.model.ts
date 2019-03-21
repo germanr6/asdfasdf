@@ -1,12 +1,17 @@
 export class Todo {
-  id: number;
+  listId: number;
+  userId: number;
   name: string;
   description: string;
-  level: number;
-  expandable: boolean;
 
-  constructor(id: number, name: string, description: string) {
-    this.id = id;
+  constructor(
+    listId: number,
+    userId: number,
+    name: string,
+    description: string
+  ) {
+    this.listId = listId;
+    this.userId = userId;
     this.name = name;
     this.description = description;
   }

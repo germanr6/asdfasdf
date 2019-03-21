@@ -2,39 +2,27 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { MatToolbarModule, MatCardModule, MatExpansionModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TodosComponent } from './todos/todos.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TodoListComponent } from './todos/todo-list/todo-list.component';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from './shared/shared.module';
 import { UiModule } from './ui/ui.module';
 import { TodosModule } from './todos/todos.module';
-
+import { RouterModule, PreloadAllModules } from '@angular/router';
+import { ROUTES } from './app.routes';
+import { TodosComponent } from './todos/todos.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TodosComponent,
-    TodoListComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
-    MatToolbarModule,
-    SharedModule,
-    UiModule,
-    TodosModule,
     FormsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatExpansionModule
+    HttpClientModule,
+    RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules }),
+    UiModule,
+    TodosModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,4 +1,11 @@
-<button mat-fab (click)="openAddListDialog()" class="le-cta-button">
+<app-nav></app-nav>
+<button
+  mat-fab
+  matTooltip="Add a list"
+  matTooltipPosition="left"
+  (click)="openAddListDialog()"
+  class="le-cta-button"
+>
   <mat-icon aria-label="Add todo list">add</mat-icon>
 </button>
 
@@ -26,11 +33,12 @@
     <h1>Lists</h1>
     <ng-template ngFor let-list [ngForOf]="todos">
       <mat-card
+        matTooltip="{{ list?.description }}"
+        matTooltipPosition="above"
         class="le-list-card"
         role="button"
         tabindex="0"
-        (click)="openList($event, list.id)"
-        (keyup)="openList($event, list.id)"
+        (click)="openList($event, list.listId)"
       >
         <span>{{ list?.name }}</span>
 
@@ -44,11 +52,16 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="openEditListDialog(list.id, list.name)">
+          <button
+            mat-menu-item
+            (click)="
+              openEditListDialog(list.listId, list.name, list.description)
+            "
+          >
             <mat-icon>create</mat-icon>
             <span>Rename</span>
           </button>
-          <button mat-menu-item (click)="deleteTodoList(list.id)">
+          <button mat-menu-item (click)="deleteTodoList(list.listId)">
             <mat-icon>delete</mat-icon>
             <span>Delete</span>
           </button>

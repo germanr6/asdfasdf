@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { TodoService } from '../shared/todo.service';
+import { Todo } from '../model/todo.model';
 
 @Component({
   selector: 'app-add-todo-dialog',
@@ -21,7 +22,13 @@ export class AddTodoDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    this.todoService.addTodoList(this.todoListForm.value.name).subscribe(
+    const todo = new Todo(
+      null,
+      1,
+      this.todoListForm.value.name,
+      this.todoListForm.value.description
+    );
+    this.todoService.addTodoList(todo).subscribe(
       data => {
         console.log('data', data);
       },

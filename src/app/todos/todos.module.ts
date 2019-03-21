@@ -8,13 +8,29 @@ import {
   MatDialogModule,
   MatInputModule,
   MatIconModule,
-  MatButtonModule
+  MatButtonModule,
+  MatListModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatMenuModule,
+  MatTooltipModule
 } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { EditTodoDialogComponent } from './edit-todo-dialog/edit-todo-dialog.component';
+import { TodoListTaskComponent } from './todo-list-task/todo-list-task.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
+import { AddTodoTaskDialogComponent } from './add-todo-task-dialog/add-todo-task-dialog.component';
+import { EditTodoTaskDialogComponent } from './edit-todo-task-dialog/edit-todo-task-dialog.component';
 
 @NgModule({
-  declarations: [AddTodoDialogComponent, EditTodoDialogComponent],
+  declarations: [
+    AddTodoDialogComponent,
+    EditTodoDialogComponent,
+    TodoListComponent,
+    TodoListTaskComponent,
+    AddTodoTaskDialogComponent,
+    EditTodoTaskDialogComponent
+  ],
   imports: [
     CommonModule,
     UiModule,
@@ -25,9 +41,19 @@ import { EditTodoDialogComponent } from './edit-todo-dialog/edit-todo-dialog.com
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule,
+    MatListModule,
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatMenuModule
   ],
   exports: [],
-  entryComponents: [AddTodoDialogComponent, EditTodoDialogComponent]
+  entryComponents: [
+    AddTodoDialogComponent,
+    EditTodoDialogComponent,
+    AddTodoTaskDialogComponent,
+    EditTodoTaskDialogComponent
+  ]
 })
 export class TodosModule {}
