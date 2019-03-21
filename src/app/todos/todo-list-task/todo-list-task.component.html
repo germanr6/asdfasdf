@@ -32,6 +32,23 @@
   <div *ngSwitchDefault>
     <h1>{{ list?.name }}</h1>
 
+    <mat-button-toggle-group
+      #group="matButtonToggleGroup"
+      [value]="selectedFiliter"
+      (change)="onFilter(group.value)"
+    >
+      <mat-button-toggle value="all">
+        All
+      </mat-button-toggle>
+      <mat-button-toggle value="completed">
+        Completed
+      </mat-button-toggle>
+      <mat-button-toggle value="outstanding">
+        Outstanding
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <br />
+    <br />
     <mat-card class="le-list-items-card">
       <mat-list>
         <ng-template ngFor let-item [ngForOf]="listItems">

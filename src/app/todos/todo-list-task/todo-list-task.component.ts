@@ -24,9 +24,11 @@ export class Item {
   styleUrls: ['./todo-list-task.component.css']
 })
 export class TodoListTaskComponent implements OnInit {
+  selectedFiliter = 'all';
   listId = this.route.snapshot.params.id;
   list: Todo = null;
   listItems: Array<Task> = [];
+  listItemsFiltered: Array<Task> = [];
   loadingListItems = true;
 
   constructor(
@@ -50,6 +52,7 @@ export class TodoListTaskComponent implements OnInit {
   public loadTodoTaskList() {
     this.todoTaskService.getAllTask(this.listId).subscribe(data => {
       this.listItems = data;
+      this.listItemsFiltered = data;
       this.loadingListItems = false;
     });
   }
@@ -63,6 +66,24 @@ export class TodoListTaskComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       this.loadTodoTaskList();
     });
+  }
+
+  onFilter(filterValue: string) {
+    switch (filterValue) {
+      case 'all':
+        this.listItems = this.listItemsFiltered;
+        break;
+      case 'completed':
+        this.listItems = this.listItemsFiltered.filter(
+          task => task.done === true
+        );
+        break;
+      case 'outstanding':
+        this.listItems = this.listItemsFiltered.filter(
+          task => task.done === false
+        );
+        break;
+    }
   }
 
   public openEditListItemDialog(

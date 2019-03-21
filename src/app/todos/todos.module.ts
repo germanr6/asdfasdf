@@ -13,8 +13,8 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatMenuModule,
-  MatTooltipModule
-} from '@angular/material';
+  MatTooltipModule,
+  MatButtonToggleModule} from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { EditTodoDialogComponent } from './edit-todo-dialog/edit-todo-dialog.component';
 import { TodoListTaskComponent } from './todo-list-task/todo-list-task.component';
@@ -46,7 +46,8 @@ import { EditTodoTaskDialogComponent } from './edit-todo-task-dialog/edit-todo-t
     MatListModule,
     MatCheckboxModule,
     MatTooltipModule,
-    MatMenuModule
+    MatMenuModule,
+    MatButtonToggleModule
   ],
   exports: [],
   entryComponents: [

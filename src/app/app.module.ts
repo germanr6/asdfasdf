@@ -1,3 +1,4 @@
+import { HomeModule } from './home/home.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -20,7 +21,8 @@ import { TodosComponent } from './todos/todos.component';
     HttpClientModule,
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules }),
     UiModule,
-    TodosModule
+    TodosModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
