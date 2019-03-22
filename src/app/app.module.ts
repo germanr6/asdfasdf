@@ -1,16 +1,20 @@
+import { TodoTaskService } from './todos/shared/todo-task.service';
 import { HomeModule } from './home/home.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UiModule } from './ui/ui.module';
 import { TodosModule } from './todos/todos.module';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { ROUTES } from './app.routes';
-import { TodosComponent } from './todos/todos.component';
+import { TodoService } from './todos/shared/todo.service';
+import { AuthGuard } from './shared/auth.guard';
+import { AuthService } from './shared/auth.service';
+import { JwtInterceptor } from './shared/jwt.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +28,13 @@ import { TodosComponent } from './todos/todos.component';
     TodosModule,
     HomeModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AuthService,
+    TodoService,
+    TodoTaskService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

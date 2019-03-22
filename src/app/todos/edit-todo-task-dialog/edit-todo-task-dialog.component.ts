@@ -37,14 +37,9 @@ export class EditTodoTaskDialogComponent implements OnInit {
       this.data.taskDone,
       this.editTaskForm.value.description
     );
-    this.todoTaskService.editTask(this.data.taskId, task).subscribe(
-      data => {
-        console.log('data', data);
-      },
-      error => {
-        console.log('error: ', error);
-      }
-    );
+    this.todoTaskService
+      .editTask(this.data.taskId, task)
+      .subscribe(() => {}, () => {});
     this.dialogRef.close();
   }
 

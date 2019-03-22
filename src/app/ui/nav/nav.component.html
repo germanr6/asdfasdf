@@ -1,13 +1,18 @@
 <mat-toolbar color="primary" class="le-toolbar">
   <nav class="container le-nav">
-    <button mat-button disableRipple routerLink="/lists" routerLinkActive="active">
+    <button
+      mat-button
+      disableRipple
+      routerLink="/lists"
+      routerLinkActive="active"
+    >
       <mat-icon>format_list_bulleted</mat-icon>
       <span>Lists</span>
     </button>
 
     <span class="le-nav__spacer"></span>
 
-    <button mat-button disableRipple >
+    <button mat-button disableRipple (click)="signOut()">
       <mat-icon>exit_to_app</mat-icon>
       <span>Log out</span>
     </button>

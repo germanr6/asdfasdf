@@ -24,8 +24,8 @@ export class TodoService {
     return this.http.get('/api/todo/list/' + listId);
   }
 
-  getAll(): Observable<any> {
-    return this.http.get('/api/todo/list/user/1');
+  getAll(userId: number): Observable<any> {
+    return this.http.get('/api/todo/list/user/' + userId);
   }
 
   addTodoList(todo: Todo): Observable<object> {

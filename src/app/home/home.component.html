@@ -1,8 +1,52 @@
 <app-header></app-header>
 <mat-card class="login-box">
-  <mat-card-content>
-    <button mat-raised-button routerLink="/lists">
-      <mat-icon svgIcon="btn_google"></mat-icon> Sign in with google
-    </button>
-  </mat-card-content>
+  <form class="login-form" [formGroup]="loginForm">
+    <mat-card-content>
+      <table class="center" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="full-width">
+              <input
+                matInput
+                placeholder="Username"
+                formControlName="username"
+                required
+              />
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="full-width">
+              <input
+                matInput
+                placeholder="Password"
+                type="password"
+                formControlName="password"
+                required
+              />
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="loginForm.invalid"
+        (click)="signIn()"
+      >
+        Login
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="loginForm.invalid"
+        (click)="signUp()"
+      >
+        Sign Up
+      </button>
+    </mat-card-actions>
+  </form>
 </mat-card>

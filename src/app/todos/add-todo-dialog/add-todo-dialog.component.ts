@@ -1,3 +1,4 @@
+import { AuthService } from './../../shared/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
@@ -13,7 +14,8 @@ export class AddTodoDialogComponent implements OnInit {
   todoListForm: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<AddTodoDialogComponent>,
+    private authService: AuthService,
+    private dialogRef: MatDialogRef<AddTodoDialogComponent>,
     private todoService: TodoService
   ) {}
 
@@ -24,18 +26,11 @@ export class AddTodoDialogComponent implements OnInit {
   onSubmit() {
     const todo = new Todo(
       null,
-      1,
+      this.authService.getUser().userId,
       this.todoListForm.value.name,
       this.todoListForm.value.description
     );
-    this.todoService.addTodoList(todo).subscribe(
-      data => {
-        console.log('data', data);
-      },
-      error => {
-        console.log('error: ', error);
-      }
-    );
+    this.todoService.addTodoList(todo).subscribe(() => {}, () => {});
     this.dialogRef.close();
   }
 

@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { TodoService } from '../shared/todo.service';
 import { Todo } from '../model/todo.model';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-edit-todo-dialog',
@@ -16,6 +17,7 @@ export class EditTodoDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA)
     private data: { listId: number; listName: string; listDescription: string },
     private dialogRef: MatDialogRef<EditTodoDialogComponent>,
+    private authService: AuthService,
     private todoService: TodoService
   ) {}
 
@@ -26,16 +28,14 @@ export class EditTodoDialogComponent implements OnInit {
   onSubmit() {
     const todo = new Todo(
       this.data.listId,
-      1,
+      this.authService.getUser().userId,
       this.editTodoListForm.value.name,
       this.editTodoListForm.value.description
     );
     this.todoService.updateTodoList(this.data.listId, todo).subscribe(
-      data => {
-        console.log('data', data);
+      () => {
       },
-      error => {
-        console.log('error: ', error);
+      () => {
       }
     );
     this.dialogRef.close();

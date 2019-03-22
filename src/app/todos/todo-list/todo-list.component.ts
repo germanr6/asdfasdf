@@ -1,3 +1,4 @@
+import { AuthService } from './../../shared/auth.service';
 import { AddTodoDialogComponent } from './../add-todo-dialog/add-todo-dialog.component';
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../shared/todo.service';
@@ -14,17 +15,23 @@ export class TodoListComponent implements OnInit {
   todos: Array<Todo> = [];
   loadingLists = true;
 
-  constructor(private todoService: TodoService, private dialog: MatDialog) {}
+  constructor(
+    private authService: AuthService,
+    private todoService: TodoService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.loadTodoLists();
   }
 
   public loadTodoLists() {
-    this.todoService.getAll().subscribe(data => {
-      this.todos = data;
-      this.loadingLists = false;
-    });
+    this.todoService
+      .getAll(this.authService.getUser().userId)
+      .subscribe(data => {
+        this.todos = data;
+        this.loadingLists = false;
+      });
   }
 
   public openList(event, listId: number) {

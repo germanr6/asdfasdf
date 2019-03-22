@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,9 +9,11 @@ import {
   MatCardModule,
   MatButtonModule,
   MatProgressSpinnerModule,
-  MatIconModule
+  MatIconModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { UiModule } from '../ui/ui.module';
+import { SnackBarService } from '../shared/snackbar.service';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -22,8 +25,11 @@ import { UiModule } from '../ui/ui.module';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    ReactiveFormsModule,
     UiModule,
-    RouterModule
-  ]
+    RouterModule,
+    MatSnackBarModule
+  ],
+  providers: [SnackBarService]
 })
 export class HomeModule {}
